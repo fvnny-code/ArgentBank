@@ -2,8 +2,26 @@ import "./Login.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 
+import { useState, useEffect, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Navigate } from 'react-router-dom';
 
 export default function Login() {
+
+// Initial State
+let [loginError, setLoginError] = useState("");
+let [loginStatus, setLoginStatus]= useState(0);
+
+let [email, setEmail] = useState("");
+let [password, setPassword] = useState("");
+
+
+
+function handleAuthentication(){
+  
+}
+
+
   return (
   <main className="main bg-dark">
     <section className="sign-in-content">
@@ -18,11 +36,8 @@ export default function Login() {
             <label htmlFor="password">Password</label>
             <input type="password" id="password" />
         </div>
-        <div className="input-remember">
-            <input type="checkbox" id="remember-me" />
-            <label htmlFor="remember-me">Remember me</label>
-        </div>
-        <a className="sign-in-button">Sign In</a>
+
+        <a className="sign-in-button" onClick={handleAuthentication()}>Sign In</a>
     </form>
 
     </section>
