@@ -1,9 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { clientHTTP } from "../../api/api";
 
-const initialState = {
-  value: localStorage.getItem("token") || 0,
-};
+const initialState = null;
 
 const tokenReducer = createSlice({
   name: "token",
@@ -11,12 +9,19 @@ const tokenReducer = createSlice({
 
   reducers: {
     setToken: (state, action) => {
-      state.value = action.payload;
+      state = action.payload;
+
       //automatisation du changement de header dans mon clientHTTP
-     clientHTTP.defaults.headers.common['Authorization'] = `Bearer ${action.payload}`;
+      clientHTTP.defaults.headers.common[
+        "Authorization"
+      ] = `Bearer ${action.payload}`;
+      return state;
+    },
+    clearCredentials: (state, action) => {
+    return null;
     },
   },
 });
 
-export const { setToken } = tokenReducer.actions;
+export const { setToken, clearCredentials } = tokenReducer.actions;
 export default tokenReducer.reducer;

@@ -1,19 +1,21 @@
 import axios from "axios";
 
+
 export const clientHTTP = axios.create({
-    baseURL: import.meta.env.API_URI,
-    headers:{
-        "Content-Type": "application/json"
-    }
-})
+  baseURL: import.meta.env.VITE_API_URI,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 
-export async function authenticate(username, password){
+export const authenticate = async (email, password) => {
+  return await clientHTTP
+    .post("/user/login", { email, password })
+    .then((response) => response.data.body);
+};
 
-    // return await clientHTTP.post(`/quelquechose/autrechose`)
-    // .then(response => response.data)
-}
-
-export async function getUserInfos(){
-    // return await clientHTTP.post(`/quelquechose/autrechose`)
-    // .then(response => response.data)
-}
+export const getUserInfos = async () => {
+  return await clientHTTP
+    .post("/user/profile")
+    .then((response) => response.data.body);
+};

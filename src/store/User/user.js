@@ -7,10 +7,13 @@ export const userReducer = createSlice({
     initialState,
 
     reducers : {
-       setUserInfos:(state, action)=> {}
-    }
+       setUserInfos:(state, action)=> {
+        state = action.payload;
+        return state;
+       },
+    },
 
-})
+});
 
 export const { setUserInfos } = userReducer.actions;
 export default userReducer.reducer;
