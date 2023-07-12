@@ -19,3 +19,9 @@ export const getUserInfos = async () => {
     .post("/user/profile")
     .then((response) => response.data.body);
 };
+
+export const saveEditUserProfile = async (firstName, lastName)=> {
+  return await clientHTTP
+  .put("user/profile")
+  .then((response) => response.data.body);
+} 

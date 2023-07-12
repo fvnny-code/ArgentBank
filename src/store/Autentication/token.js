@@ -15,9 +15,14 @@ const tokenReducer = createSlice({
       clientHTTP.defaults.headers.common[
         "Authorization"
       ] = `Bearer ${action.payload}`;
+      console.log(clientHTTP.defaults.headers.common)
       return state;
     },
     clearCredentials: (state, action) => {
+      delete clientHTTP.defaults.headers.common[
+        "Authorization"
+      ]
+      //console.log(clientHTTP.defaults.headers.common)
     return null;
     },
   },

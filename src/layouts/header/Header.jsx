@@ -5,17 +5,17 @@ import { faSignOut, faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import logo from "../../assets/img/argentBankLogo.png";
 import "./Header.css";
 
-import { useSelector } from "react-redux";
-import {clearCredentials} from "../../store/Autentication/token"
-
+import { useSelector, useDispatch } from "react-redux";
+import { clearCredentials } from "../../store/Autentication/token";
 
 export default function Header() {
-  
-  const isAuth  = useSelector((store) => store.token);
-  // const userName = useSelector((store)=> store.user)
-  
+  const isAuth = useSelector((store) => store.token);
+  const user = useSelector((store) => store.user);
+
+  const dispatch = useDispatch();
+
   return (
-    <> 
+    <>
       <nav className="main-nav">
         <NavLink to="/" className="main-nav-logo">
           <img
@@ -27,16 +27,20 @@ export default function Header() {
         </NavLink>
         <div>
           <>
-            {isAuth ? (
+            {isAuth && user ?(
               <>
                 <NavLink to="/profile" className="main-nav-item">
                   <FontAwesomeIcon
                     icon={faUserCircle}
                     className="main-nav-icon"
                   />
-                  {/* {userName.firstName} */}
+                  {user.firstName} 
                 </NavLink>
-                <NavLink to="/" className="main-nav-item" onClick={clearCredentials()} >
+                <NavLink
+                  to="/"
+                  className="main-nav-item"
+                  onClick={() => dispatch(clearCredentials())}
+                >
                   <FontAwesomeIcon icon={faSignOut} className="main-nav-icon" />
                   Sign Out
                 </NavLink>
