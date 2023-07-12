@@ -9,17 +9,16 @@ import { getUserInfos, saveEditUserProfile } from "../../api/api";
 
 export default function Profile() {
   // use State
-  let [newFirstName, setNewFirstname] = useState("");
-  let [newLastName, setNewLastName] = useState("");
-
   const [isLoading, setIsLoading] = useState(true);
+  const [isEditing, setIsEditing] = useState(false);
 
-// Use Selector / Use Effect
+  const [newFirstName, setNewFirstName] = useState();
+  const [newLastName, setNewLastName] = useState();
+
+  // Use Selector / Use Effect
 
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
-  // const firstName = useSelector((state)=> state.user.firstName);
-  // const lastName = useSelector((state)=> state.user.lastName)
 
   const loadUserInfo = async () => {
     try {
@@ -37,28 +36,21 @@ export default function Profile() {
 
   // Edit Name
   const handleEdit = () => {
-    document.getElementById("fullName").style.display = "none";
-    document.getElementById("edit-button").style.display = "none";
-    document.getElementById("edit-section").style.display = "block";
+    setIsEditing(true);
   };
 
   // Save Edit
-  const handleSaveEdit = () => {
-    document.getElementById("fullName").style.display = "block";
-    document.getElementById("edit-button").style.display = "initial";
-    document.getElementById("edit-section").style.display = "none";
-    dispatch(getUserInfos(newFirstName));
-    dispatch(getUserInfos(newLastName));
-
-    const userName = { firstName: newFirstName, lastName: newLastName };
-    saveEditUserProfile(token, fullName);
+  const handleSaveEdit = async (event) => {
+   event.preventDefault();
+    try {
+      const response = await saveEditUserProfile(newFirstName, newLastName);
+      dispatch(setUserInfos(response));
+      setIsEditing(false);
+    } catch (error) {}
   };
-
   // Cancel Edit
   const handleCancelEdit = () => {
-    document.getElementById("fullName").style.display = "block";
-    document.getElementById("edit-button").style.display = "initial";
-    document.getElementById("edit-section").style.display = "none";
+    setIsEditing(false);
   };
 
   return (
@@ -68,39 +60,56 @@ export default function Profile() {
           <div className="header">
             <h1 id="welcome-name">
               Welcome back <br />
-              <span id="fullName">
-                {user.firstName} {user.lastName}
-              </span>
+              {!isEditing && (
+                <span id="fullName">
+                  {user.firstName} {user.lastName}
+                </span>
+              )}
             </h1>
-            <button id="edit-button" type="button" onClick={handleEdit}>
-              Edit Name
-            </button>
-            <div id="edit-section">
-              <form name="edit">
-                <div className="profile-input-wrapper">
-                  <input type="text" placeholder="firstname" required />
+            {!isEditing && (
+              <button id="edit-button" type="button" onClick={handleEdit}>
+                Edit Name
+              </button>
+            )}
+            {isEditing && (
+              <div id="edit-section">
+                <form name="edit">
+                  <div className="profile-input-wrapper">
+                    <input
+                      type="text"
+                      placeholder="firstname"
+                      required
+                      onChange={(e) => setNewFirstName(e.currentTarget.value)}
+                    />
+                  </div>
+                  <div className="profile-input-wrapper">
+                    <input
+                      type="text"
+                      placeholder="lastname"
+                      required
+                      onChange={(e) => setNewLastName(e.currentTarget.value)}
+                    />
+                  </div>
+                  <div>
+                  <button
+                    type="submit"
+                    className="save-button"
+                    onClick={handleSaveEdit}
+                  >
+                    Save
+                  </button>
+                  <button
+                    type="submit"
+                    className="cancel-button"
+                    onClick={handleCancelEdit}
+                  >
+                    Cancel
+                  </button>
                 </div>
-                <div className="profile-input-wrapper">
-                  <input type="text" placeholder="lastname" required />
-                </div>
-              </form>
-              <div>
-                <button
-                  type="submit"
-                  className="save-button"
-                  onClick={handleSaveEdit}
-                >
-                  Save
-                </button>
-                <button
-                  type="submit"
-                  className="cancel-button"
-                  onClick={handleCancelEdit}
-                >
-                  Cancel
-                </button>
+                </form>
+               
               </div>
-            </div>
+            )}
           </div>
           <h2 className="sr-only">Accounts</h2>
           <Account

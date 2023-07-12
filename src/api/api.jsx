@@ -22,6 +22,6 @@ export const getUserInfos = async () => {
 
 export const saveEditUserProfile = async (firstName, lastName)=> {
   return await clientHTTP
-  .put("user/profile")
+  .put("user/profile", {firstName, lastName})
   .then((response) => response.data.body);
 } 
