@@ -7,6 +7,7 @@ import "./Header.css";
 
 import { useSelector, useDispatch } from "react-redux";
 import { clearCredentials } from "../../store/Autentication/token";
+import { clearCredentials as clearUser } from "../../store/User/user";
 
 export default function Header() {
   const isAuth = useSelector((store) => store.token);
@@ -39,7 +40,10 @@ export default function Header() {
                 <NavLink
                   to="/"
                   className="main-nav-item"
-                  onClick={() => dispatch(clearCredentials())}
+                  onClick={() => {
+                    dispatch(clearCredentials())
+                    dispatch(clearUser())
+                  }}
                 >
                   <FontAwesomeIcon icon={faSignOut} className="main-nav-icon" />
                   Sign Out

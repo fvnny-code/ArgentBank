@@ -4,6 +4,7 @@ import Home from "../pages/home/Home";
 import Login from "../pages/login/Login";
 import Profile from "../pages/profile/Profile";
 import Error404 from "../pages/error404/Error404";
+import Guard from "../components/Guard/Guard";
 
 export default function Router() {
   return (
@@ -11,9 +12,11 @@ export default function Router() {
       <Layout>
         <Routes>
           <Route element={<Navigate replace to="/home" />} path="/" />
+          <Route element={<Guard />} path="">
+            <Route path="/profile" element={<Profile />} />
+          </Route>
           <Route path="/home" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/profile" element={<Profile />} />
           <Route path="*" element={<Error404 />} />
         </Routes>
       </Layout>

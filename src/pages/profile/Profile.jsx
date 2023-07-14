@@ -15,7 +15,7 @@ export default function Profile() {
   const [newFirstName, setNewFirstName] = useState();
   const [newLastName, setNewLastName] = useState();
 
-  // Use Selector / Use Effect
+  // Use Disptach Use Selector / Use Effect
 
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
@@ -42,16 +42,37 @@ export default function Profile() {
   // Save Edit
   const handleSaveEdit = async (event) => {
    event.preventDefault();
+  
     try {
+
       const response = await saveEditUserProfile(newFirstName, newLastName);
       dispatch(setUserInfos(response));
+   
       setIsEditing(false);
-    } catch (error) {}
+    } catch (error) {
+      // if(newFirstName.trim() || newLastName.trim() === ''){
+      //   return (<span>"please complete the above inputs"</span>)
+      //  }
+    }
   };
   // Cancel Edit
   const handleCancelEdit = () => {
     setIsEditing(false);
   };
+
+
+  // Validate input
+  // const validateInput = ({newFirstName, newLastName})=> {
+  //   if(!newFirstName.trim() && !newLastName.trim()){
+  //     return false;
+  //   }
+  //   return true;
+  // }
+
+  // const validInput = validateInput({newFirstName, newLastName})
+  // if(!validInput){ 
+  //   return null;
+  // }
 
   return (
     <>
@@ -62,7 +83,7 @@ export default function Profile() {
               Welcome back <br />
               {!isEditing && (
                 <span id="fullName">
-                  {user.firstName} {user.lastName}
+                  {user.firstName}
                 </span>
               )}
             </h1>
