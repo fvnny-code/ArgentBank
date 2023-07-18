@@ -41,38 +41,24 @@ export default function Profile() {
 
   // Save Edit
   const handleSaveEdit = async (event) => {
-   event.preventDefault();
-  
-    try {
-
-      const response = await saveEditUserProfile(newFirstName, newLastName);
-      dispatch(setUserInfos(response));
+    event.preventDefault();
    
+    try {
+      const response = await saveEditUserProfile(newFirstName, newLastName);      
+      dispatch(setUserInfos(response));
       setIsEditing(false);
-    } catch (error) {
-      // if(newFirstName.trim() || newLastName.trim() === ''){
-      //   return (<span>"please complete the above inputs"</span>)
-      //  }
-    }
+      if (newFirstName.trim() || newLastName.trim() === "") {
+        alert("please complete all the inputs");
+        return;
+      }
+    } catch (error) {}
+   
   };
   // Cancel Edit
   const handleCancelEdit = () => {
     setIsEditing(false);
   };
 
-
-  // Validate input
-  // const validateInput = ({newFirstName, newLastName})=> {
-  //   if(!newFirstName.trim() && !newLastName.trim()){
-  //     return false;
-  //   }
-  //   return true;
-  // }
-
-  // const validInput = validateInput({newFirstName, newLastName})
-  // if(!validInput){ 
-  //   return null;
-  // }
 
   return (
     <>
@@ -81,11 +67,7 @@ export default function Profile() {
           <div className="header">
             <h1 id="welcome-name">
               Welcome back <br />
-              {!isEditing && (
-                <span id="fullName">
-                  {user.firstName}
-                </span>
-              )}
+              {!isEditing && <span id="fullName">{user.firstName}</span>}
             </h1>
             {!isEditing && (
               <button id="edit-button" type="button" onClick={handleEdit}>
@@ -112,23 +94,22 @@ export default function Profile() {
                     />
                   </div>
                   <div>
-                  <button
-                    type="submit"
-                    className="save-button"
-                    onClick={handleSaveEdit}
-                  >
-                    Save
-                  </button>
-                  <button
-                    type="submit"
-                    className="cancel-button"
-                    onClick={handleCancelEdit}
-                  >
-                    Cancel
-                  </button>
-                </div>
+                    <button
+                      type="submit"
+                      className="save-button"
+                      onClick={handleSaveEdit}
+                    >
+                      Save
+                    </button>
+                    <button
+                      type="submit"
+                      className="cancel-button"
+                      onClick={handleCancelEdit}
+                    >
+                      Cancel
+                    </button>
+                  </div>
                 </form>
-               
               </div>
             )}
           </div>
@@ -137,16 +118,23 @@ export default function Profile() {
             title="Argent Bank Checking (x8349)"
             amount="$2,082.79"
             description="Available Balance"
+            linkPath="/transactions"
+            button="View transactions"
+
           />
           <Account
             title="Argent Bank Savings (x6712)"
             amount="$10,928.42"
             description="Available Balance"
+            linkPath="/transactions"
+            button="View transactions"
           />
           <Account
             title="Argent Bank Credit Card (x8349)"
             amount="$184.30"
             description="Current Balance"
+            linkPath="/transactions"
+            button="View transactions"
           />
         </main>
       )}

@@ -36,7 +36,9 @@
   }
 
   /* Transaction */
-
+.account-button-link{
+  text-decoration: none;
+}
   .transaction-button {
     display: block;
     width: 100%;
@@ -48,6 +50,12 @@
     background-color: #00bc77;
     color: #fff;
   }
+  .transaction-button:hover {
+    cursor: pointer;
+    
+  }
+
+  
 
   @media (min-width: 720px) {
     .account {

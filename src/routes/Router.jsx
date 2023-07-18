@@ -5,6 +5,7 @@ import Login from "../pages/login/Login";
 import Profile from "../pages/profile/Profile";
 import Error404 from "../pages/error404/Error404";
 import Guard from "../components/Guard/Guard";
+import {Transactions} from "../pages/Account/Transactions";
 
 export default function Router() {
   return (
@@ -14,6 +15,7 @@ export default function Router() {
           <Route element={<Navigate replace to="/home" />} path="/" />
           <Route element={<Guard />} path="">
             <Route path="/profile" element={<Profile />} />
+            <Route  path="/transactions" element= {<Transactions/>}/>
           </Route>
           <Route path="/home" element={<Home />} />
           <Route path="/login" element={<Login />} />
