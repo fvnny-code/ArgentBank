@@ -30,6 +30,20 @@
  }
 
  /* TransactionInfos */
+ #transactionPage {
+   color: white;
+   padding: 150px 0 40px 0;
+}
+
+.dataHead {
+   display: flex;
+   justify-content: space-between;
+   width: 90%;
+   height: 25px;
+   font-weight: bold;
+   margin: 0 auto;
+}
+
  .dataLine {
    display: flex;
    align-items: center;
@@ -67,7 +81,7 @@
    width: 25%;
 }
 
-#descr {
+#description {
    width: 30%;
 }
 
@@ -90,14 +104,35 @@
    transition: max-height 1s;
 }
 
-.moreInfo_open {
+.moreInfo_open, 
+.categoryEdit_open
+
+{
    display: block;
    background: white;
    width: 80%;
-   max-height: 150px;
+   max-height: 200px;
    overflow: hidden;
    color: black;
    text-align: left;
    padding: 5px 0 5px 10%;
    margin: 0 auto;
+   overflow-y:auto
+}
+
+/* .categorySelect_open{
+   display: block;
+} */
+
+
+.categoryEdit {
+   display: flex;
+   align-items: center;
+   flex-wrap: wrap;
+   width: 50%;
+   
+} 
+.categoryEdit :nth-child(1), 
+.categoryEdit :nth-child(2){
+   margin-left: .8rem;
 }
