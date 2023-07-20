@@ -125,14 +125,16 @@
 } */
 
 
-.categoryEdit {
+.categoryEdit, .noteEdit {
    display: flex;
    align-items: center;
    flex-wrap: wrap;
    width: 50%;
    
 } 
-.categoryEdit :nth-child(1), 
-.categoryEdit :nth-child(2){
+
+.categoryEdit :nth-child(2),
+.noteEdit :nth-child(2){
    margin-left: .8rem;
 }
+

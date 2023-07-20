@@ -36,32 +36,31 @@ export default function TransactionInfos({
     moreInfo.current.classList.toggle("moreInfo_open");
   }
 
-  function selecCategory() {
+  function selectCategory() {
     setIsEditing(true);
-    edit.current.classList.toggle("categorySelect_open");
+    edit.current.classList.toggle("categoryEdit_open");
   }
   // Cancel Edit
   const handleCancelEdit = () => {
     setIsEditing(false);
   };
-  // save Edit
-  const handleSaveEdit = () => {
-    setIsEditing(false);
-  };
-
+  // // save Edit
+  // const handleSaveEdit = () => {
+  //   setIsEditing(false);
+  // };
 
   function addNotes() {
     setIsNoting(true);
     edit.current.classList.toggle("addNotes_open");
   }
   // Cancel Notes
-const handleCancelNotes = ()=> {
-  setIsNoting(false)
-}
+  const handleCancelNotes = () => {
+    setIsNoting(false);
+  };
   // Save Notes
-const handleSaveNotes = ()=> {
-  setIsNoting(false)
-}
+  const handleSaveNotes = () => {
+    setIsNoting(false);
+  };
   return (
     <>
       <div className="dataLine">
@@ -92,7 +91,7 @@ const handleSaveNotes = ()=> {
               className="pencil"
               icon={faPen}
               ref={edit}
-              onClick={selecCategory}
+              onClick={selectCategory}
             />
           )}
           {isEditing && (
@@ -104,8 +103,8 @@ const handleSaveNotes = ()=> {
             </div>
           )}
         </div>
-        <p>
-          Notes:{" ... "}
+        <div className="noteEdit">
+          <p>Notes:{" ... "}</p>
           {!isNoting && (
             <FontAwesomeIcon
               className="pencil"
@@ -127,7 +126,7 @@ const handleSaveNotes = ()=> {
               </div>
             </div>
           )}
-        </p>
+        </div>
       </div>
     </>
   );
