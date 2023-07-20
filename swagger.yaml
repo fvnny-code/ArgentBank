@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 info:
   title: Bank Argent API documentation
   description: Contains all available API endpoints in this codebase
@@ -58,7 +58,7 @@ paths:
         '500':
           description: Internal Server Error
   /user/profile:
-    post:
+    get:
       security:
         - Bearer: []
       tags:
@@ -67,6 +67,7 @@ paths:
       description: API for fetching a user profile
       parameters:
         - in: header
+          type: string
           name: Authorization
           description: Attach Bearer JWT token
           required: true
@@ -90,6 +91,7 @@ paths:
       description: API for updating a user profile
       parameters:
         - in: header
+          type: string
           name: Authorization
           description: Attach Bearer JWT token
           required: true
@@ -110,7 +112,7 @@ paths:
           description: Invalid Fields
         '500':
           description: Internal Server Error
-  /user/accounts/{accountId} :
+  /user/accounts/{accountId}:
     get:
       security:
         - Bearer: []
@@ -120,9 +122,9 @@ paths:
       description: API for getting all accounts
       parameters:
       - in: header
-        name: Authorization
-        description: 
         type: string
+        name: Authorization
+        description: Attach Bearer JWT Token 
         required: true
       responses:
         '200':
@@ -144,7 +146,7 @@ paths:
       parameters:
       - in: header
         name: Authorization
-        description: 
+        description: Attach Bearer JWT Token  
         type: string
         required: true
       - in: path
@@ -166,7 +168,7 @@ paths:
         '200':
           description: Account transactions retrieved successfully
           schema :
-            $ref: '#/definitions/TransactionsResponse'
+            $ref: '#/definitions/AccountsResponse'
         '400':
           description: Invalid Fields
         '500':
@@ -180,7 +182,7 @@ paths:
       parameters:
       - in: header
         name: Authorization
-        description: 
+        description: Attach Bearer JWT Token
         type: string
         required: true
       - in: path
@@ -188,7 +190,7 @@ paths:
         description: User's account ID
         type: integer
         required: true
-       - in: path
+      - in: path
         name: transactionsId
         description: Transaction's ID
         type: integer
@@ -202,20 +204,16 @@ paths:
           description: Invalid Fields
         '500':
           description: Internal Server Error
-  /user/accounts/{accountId}/transactions/{transactionsId}/category :
+  /user/accounts/{accountId}/transactions/{transactionsId}/category:
     put:
       tags:
       - User Transactions
       summary: Update an existing transaction (category)
       description: API for updating a transaction's category
-      consumes:
-      -application/json
-      produces:
-      -application/json
       parameters:
       - in: header
         name: Authorization
-        description: 
+        description: Attach Bearer JWT Token
         type: string
         required: true
       - in: path
@@ -243,14 +241,10 @@ paths:
       - User Transactions
       summary: Delete an existing transaction (category)
       description: API for deleting a transaction's category
-      consumes:
-      -application/json
-      produces:
-      -application/json
       parameters:
       - in: header
         name: Authorization
-        description: 
+        description: Attach Bearer JWT Token
         type: string
         required: true
       - in: path
@@ -278,14 +272,10 @@ paths:
       - User Transactions
       summary: Update an existing transaction (notes)
       description: API for updating a transaction's notes
-      consumes:
-      -application/json
-      produces:
-      -application/json
       parameters:
       - in: header
         name: Authorization
-        description: 
+        description: Attach Bearer JWT Token
         type: string
         required: true
       - in: path
@@ -318,14 +308,10 @@ paths:
       - User Transactions
       summary: Delete an existing transaction (notes)
       description: API for deleting a transaction's notes
-      consumes:
-      -application/json
-      produces:
-      -application/json
       parameters:
       - in: header
         name: Authorization
-        description: 
+        description: Attach Bearer JWT Token
         type: string
         required: true
       - in: path
@@ -523,8 +509,7 @@ definitions:
         description: transaction category
       note:
         type: string
-        descrption: user's notes for a transaction
-    TransactionsDeleteNote:
+  TransactionsDeleteNotes:
     type: object
     properties:
       status:
@@ -536,7 +521,7 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/TransactionDetailsDeleteNote'
-    TransactionDetailsDeleteNote:
+  TransactionDetailsDeleteNote:
     type: object
     properties:
       id:
@@ -550,7 +535,7 @@ definitions:
         description: transaction category
       note:
         type: string
-        descrption: user's notes for a transaction          
+         
         
         
   
