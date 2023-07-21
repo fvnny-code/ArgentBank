@@ -8,6 +8,10 @@ host: localhost:3001
 basePath: /api/v1
 schemes:
   - http
+produces:
+  - application/json  
+consumes:
+  - application/json
 paths:
   /user/login:
     post:
@@ -46,8 +50,7 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/User'
-      produces:
-        - application/json
+
       responses:
         '200':
           description: Signup Successfully
@@ -71,8 +74,6 @@ paths:
           name: Authorization
           description: Attach Bearer JWT token
           required: true
-      produces:
-        - application/json
       responses:
         '200':
           description: User profile retrieved successully
@@ -101,8 +102,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UserProfile'
-      produces:
-        - application/json
       responses:
         '200':
           description: User profile retrieved successully
@@ -117,8 +116,8 @@ paths:
       security:
         - Bearer: []
       tags:
-      - User Transactions
-      summary: User's Account
+      - User Accounts
+      summary: User's Accounts
       description: API for getting all accounts
       parameters:
       - in: header
@@ -128,7 +127,7 @@ paths:
         required: true
       responses:
         '200':
-          description: Transactions retrieved successfully
+          description: Accounts retrieved successfully
           schema :
             $ref: '#/definitions/AccountsResponse'
         '400':
@@ -141,7 +140,7 @@ paths:
       - Bearer: []
       tags:
       - User Transactions
-      summary: Transactions details
+      summary: Transactions
       description: Get account transactions
       parameters:
       - in: header
@@ -197,7 +196,7 @@ paths:
         required: true
       responses:
         '200':
-          description: Transaction retrieved successfully
+          description: Transaction details retrieved successfully
           schema :
             $ref: '#/definitions/Transactions'
         '400':
@@ -229,7 +228,7 @@ paths:
           $ref: '#/definitions/TransactionsUpdateCategory'
       responses:
         '200':
-          description: Transaction updated successfully
+          description: Transaction category updated successfully
           schema :
             $ref: '#/definitions/Transactions'
         '400':
@@ -290,13 +289,13 @@ paths:
         type: integer        
       - in: body
         name: body
-        description: Update transaction's informations
+        description: Update transaction's notes
         required: true
         schema:
           $ref: '#/definitions/TransactionsUpdateNotes'
       responses:
         '200':
-          description: Transaction updated successfully
+          description: Transaction notes updated successfully
           schema :
             $ref: '#/definitions/Transactions'
         '400':
@@ -326,7 +325,7 @@ paths:
         type: integer
       responses:
         '204':
-          description: Transaction deleted successfully
+          description: Transaction notes deleted successfully
           schema :
             $ref: '#/definitions/TransactionsDeleteNotes'
         '400':
@@ -404,7 +403,7 @@ definitions:
     properties:
       id:
         type: integer
-      created:
+      created_at:
         type: string
         description: account creation date
       name:
@@ -416,7 +415,7 @@ definitions:
       balance:
         type: number
         example: 123
-  TransactionssResponse:
+  TransactionsResponse:
     type: object
     properties:
       status:
@@ -434,7 +433,7 @@ definitions:
       id:
         type: integer
         description: transaction ID
-      created:
+      created_at:
         type: string
         description: transaction date        
       description:
@@ -535,9 +534,3 @@ definitions:
         description: transaction category
       note:
         type: string
-         
-        
-        
-  
-  
-  
