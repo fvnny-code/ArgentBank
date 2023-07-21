@@ -25,6 +25,7 @@ export default function Login() {
       navigate('/profile')
 
     } catch (error) {
+      setLoginError("bad login")
       
     }
     

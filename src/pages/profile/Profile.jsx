@@ -12,8 +12,8 @@ export default function Profile() {
   const [isLoading, setIsLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
 
-  const [newFirstName, setNewFirstName] = useState();
-  const [newLastName, setNewLastName] = useState();
+  const [newFirstName, setNewFirstName] = useState("");
+  const [newLastName, setNewLastName] = useState("");
 
   // Use Disptach Use Selector / Use Effect
 
@@ -44,13 +44,16 @@ export default function Profile() {
     event.preventDefault();
    
     try {
-      const response = await saveEditUserProfile(newFirstName, newLastName);      
-      dispatch(setUserInfos(response));
-      setIsEditing(false);
-      if (newFirstName.trim() || newLastName.trim() === "") {
+      if (newFirstName.trim()==="" || newLastName.trim() === "") {
         alert("please complete all the inputs");
         return;
       }
+      const response = await saveEditUserProfile(newFirstName, newLastName);      
+      dispatch(setUserInfos(response));
+      setIsEditing(false);
+      //clear form values
+      setNewFirstName("")
+      setNewLastName("")
     } catch (error) {}
    
   };
