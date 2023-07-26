@@ -13,23 +13,19 @@ export default function Login() {
   let [loginError, setLoginError] = useState("");
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
-  
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await authenticate(email, password)
-      dispatch(setToken(response.token))
-      navigate('/profile')
-
+      const response = await authenticate(email, password);
+      dispatch(setToken(response.token));
+      navigate("/profile");
     } catch (error) {
-      setLoginError("bad login")
-      
+      setLoginError("bad login");
     }
-    
-    
   };
 
   return (

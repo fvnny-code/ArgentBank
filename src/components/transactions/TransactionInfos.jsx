@@ -44,10 +44,6 @@ export default function TransactionInfos({
   const handleCancelEdit = () => {
     setIsEditing(false);
   };
-  // // save Edit
-  // const handleSaveEdit = () => {
-  //   setIsEditing(false);
-  // };
 
   function addNotes() {
     setIsNoting(true);
@@ -85,7 +81,6 @@ export default function TransactionInfos({
         <p>Transaction Type: {transactionType}</p>
         <div className="categoryEdit">
           <p>Category :{category}</p>
-
           {!isEditing && (
             <FontAwesomeIcon
               className="pencil"
